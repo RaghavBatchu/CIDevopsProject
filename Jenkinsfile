@@ -19,7 +19,7 @@ pipeline {
                         sh 'docker build -t calculator:main -f docker/Dockerfile .'
 
                     } else if (env.BRANCH_NAME.startsWith('feature/')) {
-                        echo "FEATURE branch → Build + Test only"
+                        echo "FEATURE branch → Build + Test"
                         sh 'mvn -B clean test'
 
                     } else if (env.BRANCH_NAME.startsWith('release/')) {
@@ -33,7 +33,8 @@ pipeline {
 
     post {
         always {
-            junit '**/target/surefire-reports/*.xml'
+            junit allowEmptyResults: true,
+                  testResults: '**/target/surefire-reports/*.xml'
         }
     }
 }
