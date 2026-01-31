@@ -1,5 +1,5 @@
 # --- Builder stage ---
-FROM maven:3.8.8-openjdk-11-slim AS builder
+FROM maven:3.9.6-eclipse-temurin-11 AS builder
 WORKDIR /build
 COPY pom.xml .
 COPY src ./src
